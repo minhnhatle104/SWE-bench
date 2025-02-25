@@ -134,7 +134,10 @@ def create_conda_env(
         path_to_reqs = get_requirements(instance, temp_dir)
         # Make sure to deactivate so that we can remove the environment.
         # This is necessary if we are running the setup script multiple times.
-        cmd = f"source {activate_path} {env_name} && echo 'activate successful' && python -m pip install -r {path_to_reqs} ; source {deactivate_path}"
+        # cmd = f"source {activate_path} {env_name} && echo 'activate successful' && python -m pip install -r {path_to_reqs} ; source {deactivate_path}"
+
+        cmd = f"call conda activate {env_name} && echo 'activate successful' && python -m pip install -r {path_to_reqs} && conda deactivate"
+
         logger.info(
             f"[{env_name}] Installing dependencies for {env_name}; Command: {cmd}"
         )

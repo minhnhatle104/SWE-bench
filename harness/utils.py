@@ -145,6 +145,7 @@ def get_requirements(instance: dict, save_path: str = None):
         reqs_url = os.path.join(
             SWE_BENCH_URL_RAW, instance["repo"], instance[commit], req_path
         )
+        reqs_url = reqs_url.replace("\\", "/")
         reqs = requests.get(reqs_url)
         if reqs.status_code == 200:
             path_worked = True
